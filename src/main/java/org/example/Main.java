@@ -5,7 +5,6 @@ import org.example.model.Ticket;
 import org.example.service.ClientCrudService;
 import org.example.service.PlanetCrudService;
 import org.example.service.TicketCrudService;
-import org.flywaydb.core.Flyway;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,7 +13,7 @@ public class Main {
             TicketCrudService ticketService = new TicketCrudService();
 
             try {
-                // Перевірка: квиток для null клієнта
+
                 Ticket ticketWithNullClient = new Ticket();
                 ticketWithNullClient.setFromPlanet(new Planet());
                 ticketWithNullClient.setToPlanet(new Planet());
@@ -24,7 +23,7 @@ public class Main {
             }
 
             try {
-                // Перевірка: квиток для неіснуючого клієнта
+
                 Client nonExistingClient = new Client();
                 nonExistingClient.setId(999L);
                 Ticket ticketWithNonExistingClient = new Ticket();
@@ -37,7 +36,7 @@ public class Main {
             }
 
             try {
-                // Перевірка: квиток для null планети
+
                 Ticket ticketWithNullPlanet = new Ticket();
                 ticketWithNullPlanet.setClient(new Client());
                 ticketService.createTicket(ticketWithNullPlanet);
@@ -46,7 +45,7 @@ public class Main {
             }
 
             try {
-                // Перевірка: квиток для неіснуючої планети
+
                 Planet nonExistingPlanet = new Planet();
                 nonExistingPlanet.setId("X999");
                 Ticket ticketWithNonExistingPlanet = new Ticket();
@@ -58,7 +57,6 @@ public class Main {
                 System.out.println("Помилка: " + e.getMessage());
             }
 
-            // Закриття ресурсів
             clientService.close();
             planetService.close();
             ticketService.close();
